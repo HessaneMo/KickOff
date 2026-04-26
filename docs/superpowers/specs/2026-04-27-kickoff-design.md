@@ -149,6 +149,38 @@ Bouton dans navbar (icône soleil en dark → clique → light, icône lune en l
 - Section "Postes recherchés" — tags blanc/neutre
 - Bloc invitation : QR code + code court + bouton Partager
 
+### Inscription / Connexion
+- Logo KickOff centré + tagline
+- Tabs : Créer un compte / Connexion
+- Bannière trial 14j (verte, visible uniquement sur "Créer un compte")
+- Champs email + mot de passe
+- CTA principal vert
+- Lien switch entre les deux modes
+
+### Créer un tournoi (wizard 3 étapes)
+- Étape 1 : Nom du tournoi + description
+- Étape 2 : Format — taille équipes (5v5→11v11+custom), format (Poules / Élimination / Mixte), visibilité (Public / Privé)
+- Étape 3 : Résumé + confirmation
+- Barre de progression 3 steps en haut (vert = fait, bleu = actif, gris = à venir)
+
+### Rejoindre un tournoi
+- Input code court centré (format XXXX-0000, grosse typo)
+- Bouton "Rejoindre" pleine largeur vert
+- Divider "OU" + bouton "Scanner un QR code" (bordure pointillée)
+- Section "Tournois récents" — liste des tournois déjà rejoints
+
+### Profil
+- Hero : avatar initiales + nom + email + badge plan (Pro / Free)
+- Bannière upgrade si trial actif (compteur jours restants)
+- Stats perso : tournois / matchs / buts
+- Settings : Notifications, Mon poste, Sécurité, Déconnexion (rouge)
+
+### Abonnement
+- 3 cartes plans : Free (actuel, gris), Pro (recommandé, bleu), Club (gold)
+- Chaque carte : nom, prix, liste features (puce verte = dispo, barré = indispo)
+- CTA upgrade par plan
+- Note "14j gratuits sans CB" sous CTA Pro
+
 ### Encodage Score (Encodeur uniquement)
 - Header match : noms équipes + score actuel + infos match
 - Contrôles score : deux blocs côte à côte, boutons − et + par équipe
