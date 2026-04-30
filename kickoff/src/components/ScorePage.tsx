@@ -35,7 +35,7 @@ export default function ScorePage() {
       const [{ data: home }, { data: away }, { data: member }] = await Promise.all([
         supabase.from("teams").select("*").eq("id", m.home_team_id).single(),
         supabase.from("teams").select("*").eq("id", m.away_team_id).single(),
-        supabase.from("tournament_members").select("role").eq("tournament_id", m.tournament_id).eq("user_id", user!.id).in("role", ["organizer", "co_organizer", "encoder"]).limit(1),
+        supabase.from("tournament_members").select("role").eq("tournament_id", m.tournament_id).eq("user_id", user!.id).eq("role", "encoder").limit(1),
       ]);
       setHomeTeam(home);
       setAwayTeam(away);
