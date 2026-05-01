@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Convo. — Mockup Final</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #0d1117; color: #f9fafb; display: flex; justify-content: center; padding: 24px 16px; }
+.phone { width: 375px; background: #111827; border-radius: 28px; overflow: hidden; border: 6px solid #1f2937; box-shadow: 0 40px 80px rgba(0,0,0,0.6); }
+.topbar { background: #111827; padding: 13px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1f2937; }
+.back-btn { width: 30px; height: 30px; background: #1f2937; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hero { background: #f9fafb; margin: 12px; border-radius: 14px; padding: 16px; }
+.tabs { display: flex; border-bottom: 1px solid #1f2937; }
+.tab { flex: 1; padding: 9px 4px; text-align: center; font-size: 10px; font-weight: 600; color: #4b5563; border-bottom: 2px solid transparent; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; }
+.tab.active { color: #f9fafb; border-bottom: 2px solid #f9fafb; }
+.content { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+.match-card { background: #1f2937; border-radius: 12px; padding: 14px; }
+.label { font-size: 8px; font-weight: 700; color: #4b5563; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.team-row { display: flex; align-items: center; gap: 8px; }
+.section-label { font-size: 9px; font-weight: 700; color: #4b5563; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.members { background: #1f2937; border-radius: 12px; overflow: hidden; }
+.member-row { display: flex; align-items: center; padding: 9px 13px; gap: 10px; cursor: pointer; border-bottom: 1px solid #111827; }
+.member-row:last-child { border-bottom: none; }
+.member-row.open { border-bottom: none; }
+.avatar { width: 30px; height: 30px; background: #374151; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #9ca3af; flex-shrink: 0; }
+.member-info { flex: 1; }
+.member-name { font-size: 12px; font-weight: 600; color: #f1f5f9; }
+.member-pos { font-size: 9px; color: #4b5563; margin-top: 1px; }
+.badge { font-size: 8px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+.badge.starter { background: #14532d; color: #4ade80; }
+.badge.sub { background: #292524; color: #78716c; }
+.chevron { font-size: 12px; color: #4b5563; transition: transform 0.15s; display: inline-block; }
+.chevron.open { transform: rotate(90deg); color: #4ade80; }
+.stats-expand { padding: 0 13px 12px; border-top: 1px solid #374151; background: #1f2937; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 10px; }
+.stat-box { background: #111827; border-radius: 8px; padding: 8px; text-align: center; }
+.stat-val { font-size: 16px; font-weight: 900; }
+.stat-lbl { font-size: 7px; color: #4b5563; text-transform: uppercase; margin-top: 2px; }
+.pill-nav { display: flex; background: #111827; border-top: 1px solid #1f2937; padding: 8px 0 12px; }
+.pill-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; }
+.pill-icon { font-size: 16px; }
+.pill-lbl { font-size: 8px; color: #4b5563; }
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="back-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2.5"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
+    </div>
+    <span style="font-size:13px;font-weight:700;flex:1;">Tournoi Laeken 2025</span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div style="display:flex;align-items:center;gap:5px;margin-bottom:7px;">
+      <div style="width:6px;height:6px;background:#dc2626;border-radius:50%;"></div>
+      <span style="font-size:9px;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:1px;">Live</span>
+    </div>
+    <div style="font-size:19px;font-weight:900;color:#0f172a;letter-spacing:-0.6px;margin-bottom:2px;">Tournoi Laeken 2025</div>
+    <div style="font-size:10px;color:#94a3b8;margin-bottom:13px;">5v5 · Poules · Privé</div>
+    <div style="display:flex;border-top:1px solid #f1f5f9;padding-top:10px;">
+      <div style="flex:1;text-align:center;border-right:1px solid #f1f5f9;"><div style="font-size:17px;font-weight:900;color:#0f172a;">4</div><div style="font-size:7px;color:#94a3b8;text-transform:uppercase;margin-top:2px;">Équipes</div></div>
+      <div style="flex:1;text-align:center;border-right:1px solid #f1f5f9;"><div style="font-size:17px;font-weight:900;color:#0f172a;">18</div><div style="font-size:7px;color:#94a3b8;text-transform:uppercase;margin-top:2px;">Joueurs</div></div>
+      <div style="flex:1;text-align:center;border-right:1px solid #f1f5f9;"><div style="font-size:17px;font-weight:900;color:#0f172a;">2</div><div style="font-size:7px;color:#94a3b8;text-transform:uppercase;margin-top:2px;">Joués</div></div>
+      <div style="flex:1;text-align:center;"><div style="font-size:17px;font-weight:900;color:#0f172a;">4</div><div style="font-size:7px;color:#94a3b8;text-transform:uppercase;margin-top:2px;">Restants</div></div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab">Classement</button>
+    <button class="tab">Matchs</button>
+    <button class="tab">Équipes</button>
+    <button class="tab">Invit.</button>
+    <button class="tab active">Convo.</button>
+  </div>
+
+  <!-- Content: Convo tab -->
+  <div class="content">
+
+    <!-- Match header -->
+    <div class="match-card">
+      <div class="label">Prochain match</div>
+      <div class="team-row">
+        <span style="font-size:12px;font-weight:800;color:#f9fafb;flex:1;">FC Bruxelles</span>
+        <span style="font-size:10px;font-weight:900;color:#374151;">vs</span>
+        <span style="font-size:12px;font-weight:800;color:#f9fafb;flex:1;text-align:right;">Les Diables</span>
+      </div>
+      <p style="font-size:9px;color:#4b5563;margin-top:4px;">Sam 3 mai · 15h00</p>
+    </div>
+
+    <!-- Members list -->
+    <div>
+      <div class="section-label">Convoqués · 4</div>
+      <div class="members">
+
+        <!-- Row 1 - closed -->
+        <div class="member-row" onclick="toggle('r1','r1s')">
+          <div class="avatar">AD</div>
+          <div class="member-info">
+            <div class="member-name">A. Dubois</div>
+            <div class="member-pos">Gardien</div>
+          </div>
+          <span class="badge starter">Tit.</span>
+          <span class="chevron" id="r1">›</span>
+        </div>
+
+        <!-- Row 2 - OPEN -->
+        <div>
+          <div class="member-row open" style="border-bottom:none;" onclick="toggle('r2','r2s')">
+            <div class="avatar" style="background:#374151;color:#4ade80;">KM</div>
+            <div class="member-info">
+              <div class="member-name">Kofi Mboto</div>
+              <div class="member-pos">Milieu</div>
+            </div>
+            <span class="badge starter">Tit.</span>
+            <span class="chevron open" id="r2">›</span>
+          </div>
+          <div class="stats-expand" id="r2s">
+            <div class="stats-grid">
+              <div class="stat-box"><div class="stat-val" style="color:#f9fafb;">3</div><div class="stat-lbl">Matchs</div></div>
+              <div class="stat-box"><div class="stat-val" style="color:#4ade80;">2</div><div class="stat-lbl">Buts</div></div>
+              <div class="stat-box"><div class="stat-val" style="color:#60a5fa;">1</div><div class="stat-lbl">Assists</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3 - closed -->
+        <div class="member-row" onclick="toggle('r3','r3s')">
+          <div class="avatar">RL</div>
+          <div class="member-info">
+            <div class="member-name">R. Lefebvre</div>
+            <div class="member-pos">Attaquant</div>
+          </div>
+          <span class="badge sub">Rem.</span>
+          <span class="chevron" id="r3">›</span>
+        </div>
+
+        <!-- Row 4 - closed -->
+        <div class="member-row" style="border-bottom:none;" onclick="toggle('r4','r4s')">
+          <div class="avatar">SN</div>
+          <div class="member-info">
+            <div class="member-name">S. Nkosi</div>
+            <div class="member-pos">Défenseur</div>
+          </div>
+          <span class="badge starter">Tit.</span>
+          <span class="chevron" id="r4">›</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Pill nav -->
+  <div class="pill-nav">
+    <div class="pill-item"><div class="pill-icon">🏠</div><div class="pill-lbl">Home</div></div>
+    <div class="pill-item"><div class="pill-icon">🔍</div><div class="pill-lbl">Explorer</div></div>
+    <div class="pill-item"><div class="pill-icon">👤</div><div class="pill-lbl">Profil</div></div>
+  </div>
+
+</div>
+
+<script>
+const openStats = {};
+
+function toggle(chevId, statsId) {
+  const chev = document.getElementById(chevId);
+  const stats = document.getElementById(statsId);
+
+  if (openStats[statsId]) {
+    // close
+    if (stats) stats.style.display = 'none';
+    chev.classList.remove('open');
+    openStats[statsId] = false;
+  } else {
+    // close all others
+    Object.keys(openStats).forEach(id => {
+      if (openStats[id]) {
+        const s = document.getElementById(id);
+        if (s) s.style.display = 'none';
+        openStats[id] = false;
+      }
+    });
+    // Also reset all chevrons
+    document.querySelectorAll('.chevron').forEach(c => c.classList.remove('open'));
+
+    // open this one
+    if (stats) stats.style.display = 'block';
+    chev.classList.add('open');
+    openStats[statsId] = true;
+  }
+}
+
+// Init: row 2 open by default
+document.getElementById('r2').classList.add('open');
+openStats['r2s'] = true;
+const r2s = document.getElementById('r2s');
+// already visible in HTML
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Convocation — Placement</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #0d1117; color: #f9fafb; padding: 20px; max-width: 960px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+.sub { font-size: 13px; color: #6b7280; margin-bottom: 24px; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 640px) { .split { grid-template-columns: 1fr; } }
+.card { background: #1f2937; border-radius: 16px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s; }
+.card:hover { border-color: #374151; }
+.card.selected { border-color: #4ade80; }
+.card-image { background: #111827; padding: 16px; }
+.card-body { padding: 14px 16px; }
+.card-body h3 { font-size: 13px; font-weight: 800; color: #f9fafb; margin-bottom: 4px; }
+.card-body p { font-size: 11px; color: #6b7280; line-height: 1.5; }
+.indicator { position: fixed; bottom: 0; left: 0; right: 0; background: #1f2937; border-top: 1px solid #374151; padding: 12px 20px; text-align: center; font-size: 12px; color: #6b7280; }
+.sel { color: #4ade80; font-weight: 700; }
+.badge { display: inline-block; font-size: 7px; font-weight: 700; padding: 2px 7px; border-radius: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Placement de la section Convocation</h1>
+<p class="sub">Où le joueur/organisateur accède à "Ma convocation" ?</p>
+
+<div class="split">
+
+  <!-- OPTION A: Nouvel onglet dans TournamentPage -->
+  <div class="card" data-choice="a" onclick="select(this)">
+    <div class="card-image">
+      <!-- Pill nav tournoi -->
+      <div style="display:flex;gap:4px;margin-bottom:12px;background:#1f2937;border-radius:10px;padding:4px;">
+        <div style="flex:1;text-align:center;padding:5px 4px;border-radius:7px;font-size:8px;font-weight:700;color:#6b7280;">Classement</div>
+        <div style="flex:1;text-align:center;padding:5px 4px;border-radius:7px;font-size:8px;font-weight:700;color:#6b7280;">Matchs</div>
+        <div style="flex:1;text-align:center;padding:5px 4px;border-radius:7px;font-size:8px;font-weight:700;color:#6b7280;">Équipes</div>
+        <div style="flex:1;text-align:center;padding:5px 4px;border-radius:7px;font-size:8px;font-weight:800;color:#111827;background:#4ade80;">Convo.</div>
+      </div>
+      <!-- Contenu onglet -->
+      <div style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Prochain match</div>
+      <div style="background:#1f2937;border-radius:10px;padding:10px 12px;margin-bottom:8px;">
+        <div style="font-size:9px;color:#4b5563;margin-bottom:4px;">Sam 3 mai · 15h00</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span style="font-size:11px;font-weight:700;color:#f9fafb;">FC Bruxelles</span>
+          <span style="font-size:10px;font-weight:900;color:#374151;">vs</span>
+          <span style="font-size:11px;font-weight:700;color:#f9fafb;">Les Diables</span>
+        </div>
+      </div>
+      <!-- Fiche joueur expand -->
+      <div style="background:#1f2937;border-radius:10px;border:1px solid #4ade80;overflow:hidden;">
+        <div style="display:flex;align-items:center;padding:9px 12px;gap:8px;">
+          <div style="width:28px;height:28px;background:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#4ade80;">KM</div>
+          <div style="flex:1;">
+            <div style="font-size:11px;font-weight:700;color:#f9fafb;">Kofi Mboto</div>
+            <div style="font-size:8px;color:#4ade80;">Milieu · FC Bruxelles</div>
+          </div>
+          <div style="background:#14532d;border-radius:5px;padding:2px 7px;font-size:7px;color:#4ade80;font-weight:700;">TITULAIRE</div>
+        </div>
+        <div style="padding:0 12px 10px;border-top:1px solid #374151;">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px;">
+            <div style="background:#111827;border-radius:6px;padding:6px;text-align:center;"><div style="font-size:13px;font-weight:900;color:#f9fafb;">3</div><div style="font-size:6px;color:#4b5563;text-transform:uppercase;">Matchs</div></div>
+            <div style="background:#111827;border-radius:6px;padding:6px;text-align:center;"><div style="font-size:13px;font-weight:900;color:#4ade80;">2</div><div style="font-size:6px;color:#4b5563;text-transform:uppercase;">Buts</div></div>
+            <div style="background:#111827;border-radius:6px;padding:6px;text-align:center;"><div style="font-size:13px;font-weight:900;color:#60a5fa;">1</div><div style="font-size:6px;color:#4b5563;text-transform:uppercase;">Assists</div></div>
+            <div style="background:#111827;border-radius:6px;padding:6px;text-align:center;"><div style="font-size:13px;font-weight:900;color:#f59e0b;">67%</div><div style="font-size:6px;color:#4b5563;text-transform:uppercase;">Win%</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Onglet "Convo." dans le tournoi</h3>
+      <p>5e onglet dans TournamentPage, visible seulement si joueur/organisateur. Prochain match + fiche accordion.</p>
+    </div>
+  </div>
+
+  <!-- OPTION B: Banner dans Dashboard -->
+  <div class="card" data-choice="b" onclick="select(this)">
+    <div class="card-image">
+      <!-- Header dashboard -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <div>
+          <div style="font-size:9px;color:#4b5563;">Bonjour 👋</div>
+          <div style="font-size:14px;font-weight:900;color:#f9fafb;">Kofi</div>
+        </div>
+        <div style="width:30px;height:30px;background:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#f9fafb;">KM</div>
+      </div>
+
+      <!-- Banner convocation -->
+      <div style="background:linear-gradient(135deg,#14532d,#1a3a20);border-radius:12px;padding:12px;margin-bottom:10px;border:1px solid #4ade80;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+          <div style="width:6px;height:6px;background:#4ade80;border-radius:50%;"></div>
+          <span style="font-size:8px;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:1px;">Convoqué · Sam 3 mai</span>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:#f9fafb;margin-bottom:2px;">FC Bruxelles vs Les Diables</div>
+        <div style="font-size:9px;color:#6b7280;margin-bottom:8px;">Tournoi Laeken 2025 · 15h00</div>
+        <!-- Mini accordion fermé -->
+        <div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:8px 10px;display:flex;align-items:center;gap:6px;">
+          <div style="width:22px;height:22px;background:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;color:#4ade80;">KM</div>
+          <span style="font-size:10px;font-weight:700;color:#f9fafb;flex:1;">Kofi Mboto</span>
+          <span style="background:#14532d;border-radius:5px;padding:2px 6px;font-size:7px;color:#4ade80;font-weight:700;">Tit.</span>
+          <span style="font-size:10px;color:#4ade80;">›</span>
+        </div>
+      </div>
+
+      <!-- Tournois normaux en dessous -->
+      <div style="font-size:8px;font-weight:700;color:#4b5563;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Mes tournois</div>
+      <div style="background:#1f2937;border-radius:8px;padding:9px 12px;display:flex;align-items:center;gap:8px;">
+        <div style="width:28px;height:28px;background:#111827;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#f9fafb;">TL</div>
+        <div style="flex:1;"><div style="font-size:10px;font-weight:700;color:#f9fafb;">Tournoi Laeken 2025</div><div style="font-size:8px;color:#4b5563;">En cours · 8 équipes</div></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Banner dans le Dashboard</h3>
+      <p>Si convoqué pour un match à venir → banner vert en haut du dashboard. Tap → accordion fiche. Impossible à rater.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="indicator">
+  <span id="ind">Clique sur un design, puis réponds dans le terminal</span>
+</div>
+
+<script>
+function select(el) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('ind').innerHTML = '<span class="sel">' + el.querySelector('h3').textContent + '</span> — réponds dans le terminal';
+}
+</script>
+</body>
+</html>

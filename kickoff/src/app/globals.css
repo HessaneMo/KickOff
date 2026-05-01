@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* DARK (default) */
+:root, [data-theme="dark"] {
+  --app-bg: #111827;
+  --page-bg: #0d1117;
+  --card-bg: #1f2937;
+  --item-bg: #111827;
+  --border: #1f2937;
+  --border-subtle: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #f1f5f9;
+  --text-muted: #4b5563;
+  --text-dim: #6b7280;
+  --text-hero: #0f172a;
+  --hero-bg: #f9fafb;
+  --hero-border: #f1f5f9;
+  --hero-sub: #94a3b8;
+  --nav-bg: #111827;
+  --nav-border: #1f2937;
+  --toggle-bg: #374151;
+  --toggle-knob: #f9fafb;
+  --toggle-knob-stroke: #111827;
+  --avatar-bg: #1f2937;
+  --avatar-color: #9ca3af;
+}
+
+/* LIGHT */
+[data-theme="light"] {
+  --app-bg: #ffffff;
+  --page-bg: #f1f5f9;
+  --card-bg: #f8fafc;
+  --item-bg: #f1f5f9;
+  --border: #f1f5f9;
+  --border-subtle: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #0f172a;
+  --text-muted: #94a3b8;
+  --text-dim: #94a3b8;
+  --text-hero: #ffffff;
+  --hero-bg: #0f172a;
+  --hero-border: rgba(255,255,255,0.08);
+  --hero-sub: rgba(255,255,255,0.4);
+  --nav-bg: #ffffff;
+  --nav-border: #f1f5f9;
+  --toggle-bg: #0f172a;
+  --toggle-knob: #ffffff;
+  --toggle-knob-stroke: #0f172a;
+  --avatar-bg: #f1f5f9;
+  --avatar-color: #0f172a;
+}
+
+@theme inline {
+  --font-sans: var(--font-chakra);
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--text-primary);
+  font-family: var(--font-chakra), sans-serif;
+  transition: background 0.2s, color 0.2s;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+button, a {
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+button:hover, a:hover { opacity: 0.75; }
+button:active, a:active { opacity: 0.5; }
+
+.pressable {
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.pressable:hover { background: rgba(255,255,255,0.05) !important; }
+.pressable:active { opacity: 0.7; }

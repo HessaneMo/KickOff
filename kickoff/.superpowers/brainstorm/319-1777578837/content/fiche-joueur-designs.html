@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fiche Joueur — Designs</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #0d1117; color: #f9fafb; padding: 20px; max-width: 900px; margin: 0 auto; }
+h1 { font-size: 20px; font-weight: 900; margin-bottom: 6px; }
+.sub { font-size: 13px; color: #6b7280; margin-bottom: 24px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.card { background: #1f2937; border-radius: 16px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s, transform 0.1s; }
+.card:hover { border-color: #374151; transform: translateY(-2px); }
+.card.selected { border-color: #4ade80; }
+.card-image { background: #111827; padding: 16px; }
+.card-body { padding: 14px 16px; }
+.card-body h3 { font-size: 13px; font-weight: 800; color: #f9fafb; margin-bottom: 4px; }
+.card-body p { font-size: 11px; color: #6b7280; line-height: 1.5; }
+.indicator { position: fixed; bottom: 0; left: 0; right: 0; background: #1f2937; border-top: 1px solid #374151; padding: 12px 20px; text-align: center; font-size: 12px; color: #6b7280; }
+.indicator .sel { color: #4ade80; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>Fiche Joueur Convoqué — 3 designs</h1>
+<p class="sub">Choisis le pattern d'affichage quand on tape un joueur convoqué à un match</p>
+
+<div class="cards">
+
+  <!-- DESIGN A: Bottom Sheet -->
+  <div class="card" data-choice="a" onclick="select(this)">
+    <div class="card-image">
+      <div style="background:#1f2937;border-radius:10px;padding:10px 12px;margin-bottom:8px;">
+        <div style="font-size:9px;color:#4b5563;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Poule A · Round 1</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11px;font-weight:700;color:#f9fafb;flex:1;">FC Bruxelles</span>
+          <span style="font-size:13px;font-weight:900;color:#374151;">–</span>
+          <span style="font-size:11px;font-weight:700;color:#f9fafb;flex:1;text-align:right;">Les Diables</span>
+        </div>
+        <div style="display:flex;gap:4px;margin-top:6px;">
+          <div style="font-size:8px;color:#9ca3af;background:#374151;border-radius:4px;padding:2px 6px;">A. Dubois</div>
+          <div style="font-size:8px;color:#4ade80;background:#14532d;border-radius:4px;padding:2px 6px;">K. Mboto ↗</div>
+        </div>
+      </div>
+      <!-- Bottom sheet -->
+      <div style="background:#1f2937;border-radius:16px 16px 0 0;padding:14px;border:1px solid #374151;border-bottom:none;">
+        <div style="width:28px;height:3px;background:#374151;border-radius:2px;margin:0 auto 12px;"></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="width:38px;height:38px;background:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#f9fafb;flex-shrink:0;">KM</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:900;color:#f9fafb;">Kofi Mboto</div>
+            <div style="font-size:9px;color:#4ade80;">Milieu · FC Bruxelles</div>
+          </div>
+          <div style="background:#14532d;border-radius:6px;padding:3px 8px;font-size:8px;color:#4ade80;font-weight:700;">Tit.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;">
+          <div style="background:#111827;border-radius:7px;padding:7px;text-align:center;">
+            <div style="font-size:15px;font-weight:900;color:#f9fafb;">3</div>
+            <div style="font-size:6px;color:#4b5563;text-transform:uppercase;margin-top:2px;">Matchs</div>
+          </div>
+          <div style="background:#111827;border-radius:7px;padding:7px;text-align:center;">
+            <div style="font-size:15px;font-weight:900;color:#4ade80;">2</div>
+            <div style="font-size:6px;color:#4b5563;text-transform:uppercase;margin-top:2px;">Buts</div>
+          </div>
+          <div style="background:#111827;border-radius:7px;padding:7px;text-align:center;">
+            <div style="font-size:15px;font-weight:900;color:#60a5fa;">1</div>
+            <div style="font-size:6px;color:#4b5563;text-transform:uppercase;margin-top:2px;">Assists</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Bottom Sheet</h3>
+      <p>Tap joueur → sheet monte par le bas. Reste sur la page match. Rapide, mobile-first.</p>
+    </div>
+  </div>
+
+  <!-- DESIGN B: Page dédiée -->
+  <div class="card" data-choice="b" onclick="select(this)">
+    <div class="card-image">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+        <div style="width:22px;height:22px;background:#1f2937;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:10px;">←</div>
+        <span style="font-size:10px;font-weight:700;color:#f9fafb;">Fiche joueur</span>
+      </div>
+      <div style="background:linear-gradient(135deg,#14532d,#1a3a1a);border-radius:13px;padding:14px;margin-bottom:8px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:44px;height:44px;background:#4ade80;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#111827;flex-shrink:0;">KM</div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:900;color:#f9fafb;">Kofi Mboto</div>
+            <div style="font-size:9px;color:#4ade80;margin-top:2px;">Milieu offensif</div>
+            <div style="font-size:9px;color:#6b7280;">FC Bruxelles</div>
+          </div>
+          <div style="background:rgba(74,222,128,0.15);border-radius:6px;padding:3px 8px;font-size:7px;color:#4ade80;font-weight:700;">TITULAIRE</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+        <div style="background:#1f2937;border-radius:9px;padding:9px;">
+          <div style="font-size:18px;font-weight:900;color:#f9fafb;">3</div>
+          <div style="font-size:7px;color:#4b5563;text-transform:uppercase;margin-top:2px;">Matchs</div>
+        </div>
+        <div style="background:#1f2937;border-radius:9px;padding:9px;">
+          <div style="font-size:18px;font-weight:900;color:#4ade80;">2</div>
+          <div style="font-size:7px;color:#4b5563;text-transform:uppercase;margin-top:2px;">Buts</div>
+        </div>
+        <div style="background:#1f2937;border-radius:9px;padding:9px;">
+          <div style="font-size:18px;font-weight:900;color:#60a5fa;">1</div>
+          <div style="font-size:7px;color:#4b5563;text-transform:uppercase;margin-top:2px;">Assists</div>
+        </div>
+        <div style="background:#1f2937;border-radius:9px;padding:9px;">
+          <div style="font-size:18px;font-weight:900;color:#f9fafb;">67%</div>
+          <div style="font-size:7px;color:#4b5563;text-transform:uppercase;margin-top:2px;">Win rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Page dédiée /player?id=…</h3>
+      <p>Route séparée, hero card coloré, stats complètes. Plus riche mais quitte la page match.</p>
+    </div>
+  </div>
+
+  <!-- DESIGN C: Accordion inline -->
+  <div class="card" data-choice="c" onclick="select(this)">
+    <div class="card-image">
+      <div style="font-size:9px;color:#4b5563;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Convoqués · 3 joueurs</div>
+      <!-- Row collapsed -->
+      <div style="background:#1f2937;border-radius:8px;margin-bottom:4px;">
+        <div style="display:flex;align-items:center;padding:8px 12px;gap:8px;">
+          <div style="width:26px;height:26px;background:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#9ca3af;">AD</div>
+          <span style="font-size:10px;font-weight:600;color:#f1f5f9;flex:1;">A. Dubois</span>
+          <span style="font-size:8px;color:#4b5563;">Gardien</span>
+          <span style="font-size:9px;color:#4b5563;margin-left:4px;">›</span>
+        </div>
+      </div>
+      <!-- Row EXPANDED (bordure verte) -->
+      <div style="background:#1f2937;border-radius:8px;margin-bottom:4px;border:1px solid #4ade80;">
+        <div style="display:flex;align-items:center;padding:8px 12px;gap:8px;">
+          <div style="width:26px;height:26px;background:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#9ca3af;">KM</div>
+          <span style="font-size:10px;font-weight:700;color:#f9fafb;flex:1;">K. Mboto</span>
+          <span style="font-size:8px;color:#4ade80;">Milieu</span>
+          <span style="font-size:9px;color:#4ade80;margin-left:4px;">⌄</span>
+        </div>
+        <div style="padding:0 12px 10px;border-top:1px solid #374151;">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px;">
+            <div style="background:#111827;border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:13px;font-weight:900;color:#f9fafb;">3</div>
+              <div style="font-size:6px;color:#4b5563;text-transform:uppercase;">Matchs</div>
+            </div>
+            <div style="background:#111827;border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:13px;font-weight:900;color:#4ade80;">2</div>
+              <div style="font-size:6px;color:#4b5563;text-transform:uppercase;">Buts</div>
+            </div>
+            <div style="background:#111827;border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:13px;font-weight:900;color:#60a5fa;">1</div>
+              <div style="font-size:6px;color:#4b5563;text-transform:uppercase;">Assists</div>
+            </div>
+            <div style="background:#14532d;border-radius:6px;padding:6px;text-align:center;">
+              <div style="font-size:10px;font-weight:900;color:#4ade80;">Tit.</div>
+              <div style="font-size:6px;color:#166534;text-transform:uppercase;">Statut</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Row collapsed -->
+      <div style="background:#1f2937;border-radius:8px;">
+        <div style="display:flex;align-items:center;padding:8px 12px;gap:8px;">
+          <div style="width:26px;height:26px;background:#374151;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#9ca3af;">RL</div>
+          <span style="font-size:10px;font-weight:600;color:#f1f5f9;flex:1;">R. Lefebvre</span>
+          <span style="font-size:8px;color:#4b5563;">Attaquant</span>
+          <span style="font-size:9px;color:#4b5563;margin-left:4px;">›</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Accordion inline</h3>
+      <p>Tap joueur → row s'expand sur place. Stats sans quitter la liste. Dense, compact.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="indicator" id="indicator">
+  <span id="indicator-text">Clique sur un design, puis réponds dans le terminal</span>
+</div>
+
+<script>
+function select(el) {
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  const label = el.querySelector('h3').textContent;
+  document.getElementById('indicator-text').innerHTML = '<span class="sel">' + label + ' sélectionné</span> — réponds dans le terminal';
+}
+</script>
+</body>
+</html>
