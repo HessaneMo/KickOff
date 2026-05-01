@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import FingerprintJS from "@fingerprintjs/fingerprintjs";
 
 export default function AuthScreen() {
   const [tab, setTab] = useState<"register" | "login">("register");
@@ -26,8 +27,35 @@ export default function AuthScreen() {
     if (tab === "register" && (!prenom.trim() || !nom.trim())) { setError("Prénom et nom requis."); return; }
     setLoading(true);
     if (tab === "register") {
-      const { error } = await signUp(email, password, `${prenom.trim()} ${nom.trim()}`);
+      let fingerprint: string | null = null;
+      try {
+        const fp = await FingerprintJS.load();
+        const result = await fp.get();
+        fingerprint = result.visitorId;
+        const checkRes = await fetch("/api/fingerprint", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "check", fingerprint }),
+        });
+        const { blocked } = await checkRes.json();
+        if (blocked) {
+          setError("Un compte existe déjà depuis cet appareil.");
+          setLoading(false);
+          return;
+        }
+      } catch {}
+
+      const { error, userId } = await signUp(email, password, `${prenom.trim()} ${nom.trim()}`);
       if (error) { setError(error); setLoading(false); return; }
+
+      if (fingerprint && userId) {
+        fetch("/api/fingerprint", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "register", fingerprint, userId }),
+        }).catch(() => {});
+      }
+
       setSuccess(true);
       setLoading(false);
     } else {

@@ -13,11 +13,26 @@ export default function PillNav({ active }: { active: NavItem }) {
   ];
 
   return (
-    <div className="flex justify-center" style={{ padding: "14px 0 18px" }}>
-      <div className="flex gap-0.5 rounded-full p-1" style={{ background: "#1f2937", border: "1px solid #374151" }}>
+    <div style={{
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      display: "flex",
+      justifyContent: "center",
+      padding: "12px 16px",
+      paddingBottom: "calc(12px + env(safe-area-inset-bottom))",
+      zIndex: 50,
+      pointerEvents: "none",
+    }}>
+      <div className="flex gap-0.5 rounded-full p-1" style={{
+        background: "#1f2937",
+        border: "1px solid #374151",
+        pointerEvents: "all",
+      }}>
         {items.map(item => (
           <Link key={item.id} href={item.href}
-            className="rounded-full font-semibold transition-all"
+            className="rounded-full transition-all"
             style={{
               padding: "7px 16px",
               fontSize: "10px",

@@ -87,7 +87,7 @@ export default function JoinPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#111827" }}>
+    <div className="min-h-screen flex flex-col pb-20" style={{ background: "#111827" }}>
 
       <div style={{ background: "#111827", padding: "13px 16px", display: "flex", alignItems: "center", gap: "10px", borderBottom: "1px solid #1f2937" }}>
         <Link href="/dashboard" style={{ width: "30px", height: "30px", background: "#1f2937", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>

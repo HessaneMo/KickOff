@@ -188,7 +188,7 @@ function ViewTeam({ teamId }: { teamId: string }) {
   const abbr = team.name.split(" ").map(w => w[0]).join("").substring(0, 3).toUpperCase();
 
   return (
-    <div className="min-h-screen" style={{ background: "#111827" }}>
+    <div className="min-h-screen pb-20" style={{ background: "#111827" }}>
       <div style={{ background: "#111827", padding: "13px 16px", display: "flex", alignItems: "center", gap: "10px", borderBottom: "1px solid #1f2937" }}>
         <Link href={`/tournament?id=${team.tournament_id}`} style={{ width: "30px", height: "30px", background: "#1f2937", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>

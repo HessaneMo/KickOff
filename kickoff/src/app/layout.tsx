@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Chakra_Petch } from "next/font/google";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
@@ -13,6 +13,14 @@ const chakraPetch = Chakra_Petch({
 export const metadata: Metadata = {
   title: "KickOff — Organise ton tournoi en 5 minutes",
   description: "Plateforme de gestion de tournois de football amateur",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

@@ -11,14 +11,14 @@ interface AuthContextValue {
   profile: Profile | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
-  signUp: (email: string, password: string, fullName?: string) => Promise<{ error: string | null }>;
+  signUp: (email: string, password: string, fullName?: string) => Promise<{ error: string | null; userId?: string }>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue>({
   user: null, session: null, profile: null, loading: true,
   signIn: async () => ({ error: null }),
-  signUp: async () => ({ error: null }),
+  signUp: async () => ({ error: null, userId: undefined }),
 
   signOut: async () => {},
 });
@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!error && data.user && fullName) {
       await supabase.from("profiles").update({ username: fullName }).eq("id", data.user.id);
     }
-    return { error: error?.message ?? null };
+    return { error: error?.message ?? null, userId: data.user?.id };
   }
 
   async function signOut() {

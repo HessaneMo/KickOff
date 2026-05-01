@@ -178,7 +178,7 @@ export default function TournamentPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: "#111827" }}>
+    <div className="min-h-screen pb-20" style={{ background: "#111827" }}>
 
       {/* Topbar */}
       <div style={{ background: "#111827", padding: "13px 16px", display: "flex", alignItems: "center", gap: "10px", borderBottom: "1px solid #1f2937" }}>

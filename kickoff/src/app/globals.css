@@ -54,11 +54,17 @@
   --font-sans: var(--font-chakra);
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--page-bg);
   color: var(--text-primary);
   font-family: var(--font-chakra), sans-serif;
   transition: background 0.2s, color 0.2s;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 @keyframes pulse {

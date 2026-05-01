@@ -102,7 +102,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: v.appBg, transition: "background 0.2s" }}>
+    <div style={{ minHeight: "100vh", background: v.appBg, transition: "background 0.2s", paddingBottom: "80px" }}>
 
       {/* Nav */}
       <div style={{ background: v.appBg, padding: "14px 16px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: `1px solid ${v.navBorder}`, transition: "all 0.2s" }}>
