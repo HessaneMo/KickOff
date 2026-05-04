@@ -10,11 +10,16 @@ export default function MapPage() {
   const { user } = useAuth();
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", height: "100dvh", background: "#0f172a" }}>
-      <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+    <div style={{ position: "fixed", inset: 0, background: "#0f172a" }}>
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0,
+        bottom: "calc(58px + env(safe-area-inset-bottom))",
+      }}>
         <MapView userId={user?.id ?? null} />
       </div>
-      <PillNav active="map" />
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 2000 }}>
+        <PillNav active="map" />
+      </div>
     </div>
   );
 }
