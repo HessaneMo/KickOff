@@ -17,7 +17,7 @@ export default function PillNav({ active }: { active: NavItem }) {
   ];
 
   const activeIndex = items.findIndex(i => i.id === active);
-  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const itemRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const indicatorRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -77,23 +77,24 @@ export default function PillNav({ active }: { active: NavItem }) {
         }} />
 
         {items.map((item, i) => (
-          <Link
-            key={item.id}
-            href={item.href}
-            ref={el => { itemRefs.current[i] = el; }}
-            style={{
-              position: "relative",
-              zIndex: 1,
-              padding: "7px 14px",
-              fontSize: "10px",
-              fontWeight: active === item.id ? 700 : 600,
-              color: active === item.id ? "#0f172a" : "#6b7280",
-              textDecoration: "none",
-              borderRadius: 99,
-              transition: "color 0.2s ease",
-            }}>
-            {item.label}
-          </Link>
+          <span key={item.id} ref={el => { itemRefs.current[i] = el; }}>
+            <Link
+              href={item.href}
+              style={{
+                display: "block",
+                position: "relative",
+                zIndex: 1,
+                padding: "7px 14px",
+                fontSize: "10px",
+                fontWeight: active === item.id ? 700 : 600,
+                color: active === item.id ? "#0f172a" : "#6b7280",
+                textDecoration: "none",
+                borderRadius: 99,
+                transition: "color 0.2s ease",
+              }}>
+              {item.label}
+            </Link>
+          </span>
         ))}
       </div>
     </div>
