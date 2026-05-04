@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 type NavItem = "home" | "create" | "join" | "map" | "profile";
 
-// Variable module-level — survit aux navigations client-side (pas de full reload)
 let _prevActive: NavItem | null = null;
 
 export default function PillNav({ active }: { active: NavItem }) {
@@ -19,25 +18,29 @@ export default function PillNav({ active }: { active: NavItem }) {
 
   const activeIndex = items.findIndex(i => i.id === active);
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const indicatorRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const prevIndex = _prevActive ? items.findIndex(i => i.id === _prevActive) : activeIndex;
     const fromEl = itemRefs.current[prevIndex >= 0 ? prevIndex : activeIndex];
     const toEl = itemRefs.current[activeIndex];
+    const ind = indicatorRef.current;
+    if (!ind || !fromEl || !toEl) return;
 
-    // Snap l'indicateur sur l'onglet précédent (pas d'animation, avant paint)
-    if (fromEl) setIndicator({ left: fromEl.offsetLeft, width: fromEl.offsetWidth });
-
-    // Mémoriser l'onglet actuel pour la prochaine navigation
     _prevActive = active;
 
-    // Animer vers l'onglet actuel après que le browser a peint la position de départ
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (toEl) setIndicator({ left: toEl.offsetLeft, width: toEl.offsetWidth });
-      });
-    });
+    // 1. Snap sans transition sur la position de départ
+    ind.style.transition = "none";
+    ind.style.left = fromEl.offsetLeft + "px";
+    ind.style.width = fromEl.offsetWidth + "px";
+
+    // 2. Forcer le reflow pour que le browser enregistre la position de départ
+    void ind.offsetWidth;
+
+    // 3. Activer la transition et aller vers la destination
+    ind.style.transition = "left 0.28s cubic-bezier(0.4,0,0.2,1), width 0.28s cubic-bezier(0.4,0,0.2,1)";
+    ind.style.left = toEl.offsetLeft + "px";
+    ind.style.width = toEl.offsetWidth + "px";
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -62,16 +65,14 @@ export default function PillNav({ active }: { active: NavItem }) {
         padding: 4,
         pointerEvents: "all",
       }}>
-        {/* Sliding indicator */}
-        <div style={{
+        <div ref={indicatorRef} style={{
           position: "absolute",
           top: 4,
           bottom: 4,
-          left: indicator.left,
-          width: indicator.width,
+          left: 0,
+          width: 0,
           background: "#f9fafb",
           borderRadius: 99,
-          transition: "left 0.28s cubic-bezier(0.4,0,0.2,1), width 0.28s cubic-bezier(0.4,0,0.2,1)",
           pointerEvents: "none",
         }} />
 
