@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 type NavItem = "home" | "create" | "join" | "map" | "profile";
 
@@ -17,23 +17,27 @@ export default function PillNav({ active }: { active: NavItem }) {
   const activeIndex = items.findIndex(i => i.id === active);
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
-  const [ready, setReady] = useState(false);
 
-  // Set initial position synchronously before paint — no animation flash
   useLayoutEffect(() => {
-    const el = itemRefs.current[activeIndex];
-    if (el) setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
+    // Lire l'onglet précédent pour savoir d'où partir
+    const prevId = localStorage.getItem("pillnav_active") as NavItem | null;
+    const prevIndex = prevId ? items.findIndex(i => i.id === prevId) : activeIndex;
+    const prevEl = itemRefs.current[prevIndex >= 0 ? prevIndex : activeIndex];
+    const currEl = itemRefs.current[activeIndex];
+
+    // Placer l'indicateur sur l'onglet précédent sans animation
+    if (prevEl) setIndicator({ left: prevEl.offsetLeft, width: prevEl.offsetWidth });
+
+    // Sauvegarder l'onglet actuel pour la prochaine navigation
+    localStorage.setItem("pillnav_active", active);
+
+    // Après deux frames (browser a peint), animer vers l'onglet actuel
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (currEl) setIndicator({ left: currEl.offsetLeft, width: currEl.offsetWidth });
+      });
+    });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Enable animation after first paint
-  useEffect(() => { setReady(true); }, []);
-
-  // Animate on tab change (only after mount)
-  useEffect(() => {
-    if (!ready) return;
-    const el = itemRefs.current[activeIndex];
-    if (el) setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
-  }, [activeIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={{
@@ -66,7 +70,7 @@ export default function PillNav({ active }: { active: NavItem }) {
           width: indicator.width,
           background: "#f9fafb",
           borderRadius: 99,
-          transition: ready ? "left 0.25s cubic-bezier(0.4,0,0.2,1), width 0.25s cubic-bezier(0.4,0,0.2,1)" : "none",
+          transition: "left 0.28s cubic-bezier(0.4,0,0.2,1), width 0.28s cubic-bezier(0.4,0,0.2,1)",
           pointerEvents: "none",
         }} />
 
