@@ -8,6 +8,9 @@ import ConvocationTab from "@/components/ConvocationTab";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import type { Tournament, Team, Match } from "@/lib/database.types";
+import dynamic from "next/dynamic";
+
+const LocationTab = dynamic(() => import("@/components/LocationTab"), { ssr: false });
 
 const FORMAT_LABEL: Record<string, string> = {
   groups: "Poules",
@@ -18,7 +21,7 @@ const FORMAT_LABEL: Record<string, string> = {
 const GROUP_NAMES = ["A","B","C","D","E","F","G","H"];
 const fDot = (f: string) => f === "w" ? "#22c55e" : f === "l" ? "#ef4444" : "#f59e0b";
 
-type Tab = "Classement" | "Matchs" | "Équipes" | "Invitation" | "Convo.";
+type Tab = "Classement" | "Matchs" | "Équipes" | "Invitation" | "Convo." | "Lieu";
 
 interface GroupWithTeams { id: string; name: string; teams: Team[] }
 
@@ -245,6 +248,23 @@ export default function TournamentPage() {
         );
       })()}
 
+      {/* Terminer le tournoi */}
+      {isOrganizer && tournament.status === "ongoing" && (
+        <div style={{ margin: "0 12px 4px", background: "#1c1917", borderRadius: "10px", padding: "12px 14px", display: "flex", alignItems: "center", gap: "10px", border: "1px solid #292524" }}>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: "11px", fontWeight: 700, color: "#f87171", marginBottom: "2px" }}>Terminer le tournoi</p>
+            <p style={{ fontSize: "9px", color: "#78716c" }}>Le tournoi passera en statut "Terminé"</p>
+          </div>
+          <button onClick={async () => {
+            if (!confirm("Terminer le tournoi définitivement ?")) return;
+            await supabase.from("tournaments").update({ status: "finished" }).eq("id", tournament.id);
+            setTournament(t => t ? { ...t, status: "finished" } : t);
+          }} style={{ background: "#7f1d1d", color: "#fca5a5", border: "none", borderRadius: "8px", padding: "8px 14px", fontSize: "11px", fontWeight: 700, fontFamily: "inherit", cursor: "pointer" }}>
+            Terminer
+          </button>
+        </div>
+      )}
+
       {/* Draw modal */}
       {drawModal && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", zIndex: 50, display: "flex", alignItems: "flex-end", justifyContent: "center" }}>
@@ -293,7 +313,7 @@ export default function TournamentPage() {
 
       {/* Tabs */}
       <div style={{ display: "flex", borderBottom: "1px solid #1f2937" }}>
-        {(["Classement", "Matchs", "Équipes", "Invitation", ...(isMember || isOrganizer ? ["Convo."] : [])] as Tab[]).map(t => (
+        {(["Classement", "Matchs", "Équipes", "Invitation", ...(isMember || isOrganizer ? ["Convo."] : []), ...(isOrganizer ? ["Lieu"] : [])] as Tab[]).map(t => (
           <button key={t} onClick={() => setTab(t)}
             style={{ flex: 1, padding: "9px 4px", textAlign: "center", fontSize: "10px", fontWeight: 600, color: tab === t ? "#f9fafb" : "#4b5563", borderBottom: tab === t ? "2px solid #f9fafb" : "2px solid transparent", background: "none", cursor: "pointer", fontFamily: "inherit" }}>
             {t}
@@ -473,6 +493,15 @@ export default function TournamentPage() {
           tournamentId={tournament.id}
           userId={user.id}
           isOrganizer={isOrganizer}
+        />
+      )}
+
+      {tab === "Lieu" && isOrganizer && (
+        <LocationTab
+          tournamentId={tournament.id}
+          initialLocationName={tournament.location_name ?? null}
+          initialLat={tournament.latitude ?? null}
+          initialLng={tournament.longitude ?? null}
         />
       )}
 
