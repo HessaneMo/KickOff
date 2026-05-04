@@ -17,6 +17,9 @@ export interface Database {
           status: "draft" | "open" | "ongoing" | "finished";
           short_code: string; max_teams: number;
           starts_at: string | null; created_at: string;
+          location_name: string | null;
+          latitude: number | null;
+          longitude: number | null;
         };
         Insert: {
           name: string; organizer_id: string;
@@ -24,12 +27,18 @@ export interface Database {
           team_size: number; visibility?: "public" | "private";
           status?: "draft" | "open" | "ongoing" | "finished";
           short_code: string; max_teams?: number; starts_at?: string | null;
+          location_name?: string | null;
+          latitude?: number | null;
+          longitude?: number | null;
         };
         Update: {
           name?: string; format?: "groups" | "knockout" | "groups_knockout";
           team_size?: number; visibility?: "public" | "private";
           status?: "draft" | "open" | "ongoing" | "finished";
           max_teams?: number; starts_at?: string | null;
+          location_name?: string | null;
+          latitude?: number | null;
+          longitude?: number | null;
         };
         Relationships: [];
       };
