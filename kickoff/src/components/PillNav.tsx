@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 type NavItem = "home" | "create" | "join" | "map" | "profile";
 
@@ -19,13 +19,21 @@ export default function PillNav({ active }: { active: NavItem }) {
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
+  // Set initial position synchronously before paint — no animation flash
+  useLayoutEffect(() => {
     const el = itemRefs.current[activeIndex];
-    if (el) {
-      setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
-      setReady(true);
-    }
-  }, [activeIndex]);
+    if (el) setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Enable animation after first paint
+  useEffect(() => { setReady(true); }, []);
+
+  // Animate on tab change (only after mount)
+  useEffect(() => {
+    if (!ready) return;
+    const el = itemRefs.current[activeIndex];
+    if (el) setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
+  }, [activeIndex]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={{
