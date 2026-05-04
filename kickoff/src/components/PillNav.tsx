@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 
-type NavItem = "home" | "create" | "join" | "profile";
+type NavItem = "home" | "create" | "join" | "map" | "profile";
 
 export default function PillNav({ active }: { active: NavItem }) {
   const items: { id: NavItem; label: string; href: string }[] = [
     { id: "home", label: "Tournois", href: "/dashboard" },
     { id: "create", label: "Créer", href: "/create" },
     { id: "join", label: "Rejoindre", href: "/join" },
+    { id: "map", label: "Map", href: "/map" },
     { id: "profile", label: "Profil", href: "/profile" },
   ];
 
@@ -34,7 +35,7 @@ export default function PillNav({ active }: { active: NavItem }) {
           <Link key={item.id} href={item.href}
             className="rounded-full transition-all"
             style={{
-              padding: "7px 16px",
+              padding: "7px 14px",
               fontSize: "10px",
               fontWeight: active === item.id ? 700 : 600,
               background: active === item.id ? "#f9fafb" : "transparent",
