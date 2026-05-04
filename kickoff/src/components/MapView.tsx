@@ -91,7 +91,7 @@ export default function MapView({ userId }: { userId: string | null }) {
         const marker = L.marker([t.latitude, t.longitude], { icon }).addTo(map);
         marker.bindPopup(`
           <div style="min-width:180px">
-            <div style="font-weight:700;font-size:13px;color:#f9fafb;margin-bottom:4px">${t.name}</div>
+            <div style="font-weight:800;font-size:15px;color:#ffffff;background:#0f172a;padding:4px 8px;border-radius:6px;margin-bottom:6px;letter-spacing:-0.3px">${t.name}</div>
             <span style="display:inline-block;padding:2px 8px;border-radius:99px;font-size:10px;font-weight:700;background:${t._isMine ? "#312e81" : "#064e3b"};color:${t._isMine ? "#a5b4fc" : "#34d399"};margin-bottom:6px">
               ${t._isMine ? "🔒 Privé" : "🌍 Public"}
             </span>
